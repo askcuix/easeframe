@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+  <EF_USER ID="1" CREATE_TIME="2009-07-11 08:52:25.805" EMAIL="admin@test.com" LOGIN_NAME="admin" NAME="Admin" PLAIN_PASSWORD="admin" STATUS="enabled"/>
+  <EF_USER ID="2" CREATE_TIME="2009-07-11 08:52:25.805" EMAIL="chris@test.com" LOGIN_NAME="user" NAME="Chris" PLAIN_PASSWORD="user" STATUS="enabled"/>
+  <EF_USER ID="3" CREATE_TIME="2009-07-11 08:52:25.805" EMAIL="askcuix@test.com" LOGIN_NAME="user2" NAME="Askcuix" PLAIN_PASSWORD="user2" STATUS="enabled"/>
+  <EF_USER ID="4" CREATE_TIME="2009-07-11 08:52:25.805" EMAIL="test@test.com" LOGIN_NAME="user3" NAME="Test" PLAIN_PASSWORD="user3" STATUS="enabled"/>
+  <EF_ROLE ID="1" NAME="Admin"/>
+  <EF_ROLE ID="2" NAME="User"/>
+  <EF_USER_ROLE USER_ID="1" ROLE_ID="1"/>
+  <EF_USER_ROLE USER_ID="1" ROLE_ID="2"/>
+  <EF_USER_ROLE USER_ID="2" ROLE_ID="2"/>
+  <EF_USER_ROLE USER_ID="3" ROLE_ID="2"/>
+  <EF_USER_ROLE USER_ID="4" ROLE_ID="2"/>
+</dataset>
