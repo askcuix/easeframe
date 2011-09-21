@@ -7,8 +7,8 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.easeframe.core.mapper.CollectionMapper;
 import com.easeframe.core.unit.utils.ReflectionUtilsTest.TestBean3;
-import com.easeframe.core.utils.CollectionUtils;
 
 public class CollecitonUtilsTest {
 
@@ -24,7 +24,7 @@ public class CollecitonUtilsTest {
 		list.add(bean1);
 		list.add(bean2);
 
-		assertEquals("1,2", CollectionUtils.extractElementPropertyToString(list, "id", ","));
+		assertEquals("1,2", CollectionMapper.extractToString(list, "id", ","));
 	}
 
 	@SuppressWarnings("unchecked")
@@ -39,7 +39,7 @@ public class CollecitonUtilsTest {
 		list.add(bean1);
 		list.add(bean2);
 		;
-		List<String> result = CollectionUtils.extractElementPropertyToList(list, "id");
+		List<String> result = CollectionMapper.extractToList(list, "id");
 		assertEquals(2, result.size());
 		assertEquals(1, result.get(0));
 	}

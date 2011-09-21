@@ -4,12 +4,9 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.RenderedWebElement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverBackedSelenium;
 import org.openqa.selenium.WebElement;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.easeframe.core.utils.ThreadUtils;
 import com.thoughtworks.selenium.Selenium;
@@ -22,9 +19,6 @@ import com.thoughtworks.selenium.Selenium;
  */
 public class Selenium2 {
 
-	@SuppressWarnings("unused")
-	private static Logger logger = LoggerFactory.getLogger(Selenium2.class);
-
 	public static final int DEFAULT_TIMEOUT = 5000;
 	public static final int DEFAULT_PAUSE_TIME = 250;
 
@@ -32,16 +26,16 @@ public class Selenium2 {
 	private Selenium selenium;
 	private int defaultTimeout = DEFAULT_TIMEOUT;
 
-	public Selenium2(String driverName, String baseUrl) {
-		this.driver = WebDriverFactory.createDriver(driverName);
+	public Selenium2(WebDriver driver, String baseUrl) {
+		this.driver = driver;
 		this.selenium = new WebDriverBackedSelenium(driver, baseUrl);
 	}
 
 	/**
 	 * 不设置baseUrl的构造函数, 调用open函数时必须使用绝对路径. 
 	 */
-	public Selenium2(String driverName) {
-		this(driverName, "");
+	public Selenium2(WebDriver driver) {
+		this(driver, "");
 	}
 
 	/**
@@ -103,8 +97,8 @@ public class Selenium2 {
 	/**
 	 * 判断Element是否可见.
 	 */
-	public boolean isVisible(By by) {
-		return ((RenderedWebElement) driver.findElement(by)).isDisplayed();
+	public boolean isDisplayed(By by) {
+		return driver.findElement(by).isDisplayed();
 	}
 
 	/**
@@ -136,7 +130,7 @@ public class Selenium2 {
 	 */
 	public void check(By by) {
 		WebElement element = driver.findElement(by);
-		element.setSelected();
+		element.click();
 	}
 
 	/**
@@ -145,7 +139,7 @@ public class Selenium2 {
 	public void uncheck(By by) {
 		WebElement element = driver.findElement(by);
 		if (element.isSelected()) {
-			element.toggle();
+			element.click();
 		}
 	}
 
@@ -155,13 +149,6 @@ public class Selenium2 {
 	public boolean isChecked(By by) {
 		WebElement element = driver.findElement(by);
 		return element.isSelected();
-	}
-
-	/**
-	 * 获取Element的值.
-	 */
-	public String getValue(By by) {
-		return driver.findElement(by).getValue();
 	}
 
 	/**
@@ -205,7 +192,7 @@ public class Selenium2 {
 	public void waitForVisible(By by, int timeout) {
 		long timeoutTime = System.currentTimeMillis() + timeout;
 		while (System.currentTimeMillis() < timeoutTime) {
-			if (isVisible(by)) {
+			if (isDisplayed(by)) {
 				return;
 			}
 			ThreadUtils.sleep(DEFAULT_PAUSE_TIME);

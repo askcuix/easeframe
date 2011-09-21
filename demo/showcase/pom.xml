@@ -188,6 +188,10 @@
 			<artifactId>jersey-spring</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>com.sun.jersey.contribs</groupId>
+			<artifactId>jersey-multipart</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-client</artifactId>
 		</dependency>
@@ -356,7 +360,7 @@
 		<!-- selenium 2.0 -->
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-remote-control</artifactId>
+			<artifactId>selenium-java</artifactId>
 			<version>${selenium.version}</version>
 		</dependency>
 		<dependency>

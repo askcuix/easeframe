@@ -15,11 +15,7 @@
 				<module>module/parent</module>
 				<module>module/core</module>
 				<module>module/extension</module>
-				<module>demo/springmvc-web</module>
-				<module>demo/struts2-web</module>
-				<module>demo/mini-service</module>
 				<module>demo/showcase</module>
-				<module>tools/maven/archetype</module>
 			</modules>
 		</profile>
 	
@@ -29,7 +25,6 @@
 				<module>module/parent</module>
 				<module>module/core</module>
 				<module>module/extension</module>
-				<module>tools/maven/archetype</module>
 			</modules>
 		</profile>
 	</profiles>

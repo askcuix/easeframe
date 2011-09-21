@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.easeframe.core.mapper.ConvertUtils;
+import com.easeframe.core.mapper.ObjectMapper;
 import com.easeframe.core.utils.AssertUtils;
 import com.easeframe.core.utils.web.ServletUtils;
 
@@ -82,7 +82,7 @@ public class PropertyFilter {
 				+ filterName + "] not match the rules.");
 		propertyNames = StringUtils.splitByWholeSeparator(propertyNameStr, PropertyFilter.OR_SEPARATOR);
 
-		this.matchValue = ConvertUtils.convertStringToObject(value, propertyClass);
+		this.matchValue = ObjectMapper.convertToObject(value, propertyClass);
 	}
 
 	/**

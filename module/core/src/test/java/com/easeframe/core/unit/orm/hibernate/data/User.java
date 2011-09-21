@@ -17,7 +17,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import com.easeframe.core.utils.CollectionUtils;
+import com.easeframe.core.mapper.CollectionMapper;
 
 /**
  * User.
@@ -107,7 +107,7 @@ public class User extends IdEntity {
 
 	@Transient
 	public String getRoleNames() {
-		return CollectionUtils.extractElementPropertyToString(roleList, "name", ", ");
+		return CollectionMapper.extractToString(roleList, "name", ", ");
 	}
 
 	@Override

@@ -34,7 +34,7 @@
 		<!-- memcached begin -->
 		<dependency>
 			<groupId>spy</groupId>
-			<artifactId>memcached</artifactId>
+			<artifactId>spymemcached</artifactId>
 			<optional>true</optional>
 		</dependency>
 
