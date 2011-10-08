@@ -71,6 +71,7 @@ Checkstyle configuration for EaseFrame
     </module>
     <module name="AvoidStarImport">
       <property name="severity" value="warning"/>
+      <property name="allowStaticMemberImports" value="true"/>
     </module>
     <module name="IllegalImport">
       <property name="severity" value="warning"/>
