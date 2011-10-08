@@ -1,6 +1,5 @@
 package com.easeframe.demo.showcase.common.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -18,7 +17,8 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import com.easeframe.core.utils.reflection.ConvertUtils;
+import com.easeframe.core.mapper.CollectionMapper;
+import com.google.common.collect.Lists;
 
 /**
  * 用户.
@@ -28,7 +28,7 @@ import com.easeframe.core.utils.reflection.ConvertUtils;
  */
 
 @Entity
-@Table(name = "EF_USER")
+@Table(name = "USERS")
 public class User extends IdEntity {
 
 	private String loginName;
@@ -39,7 +39,7 @@ public class User extends IdEntity {
 	private String status;
 	private Integer version;
 
-	private List<Role> roleList = new ArrayList<Role>(); //有序的关联对象集合
+	private List<Role> roleList = Lists.newArrayList(); //有序的关联对象集合
 
 	//Hibernate自动维护的Version字段
 	@Version
@@ -109,7 +109,7 @@ public class User extends IdEntity {
 	//多对多定义
 	@ManyToMany
 	//中间表定义,表名采用默认命名规则
-	@JoinTable(name = "EF_USER_ROLE", joinColumns = { @JoinColumn(name = "USER_ID") }, inverseJoinColumns = { @JoinColumn(name = "ROLE_ID") })
+	@JoinTable(name = "USER_ROLE", joinColumns = { @JoinColumn(name = "USER_ID") }, inverseJoinColumns = { @JoinColumn(name = "ROLE_ID") })
 	//Fecth策略定义
 	@Fetch(FetchMode.SUBSELECT)
 	//集合按id排序
@@ -125,7 +125,7 @@ public class User extends IdEntity {
 	@Transient
 	@JsonIgnore
 	public String getRoleNames() {
-		return ConvertUtils.convertElementPropertyToString(roleList, "name", ", ");
+		return CollectionMapper.extractToString(roleList, "name", ", ");
 	}
 
 	@Override

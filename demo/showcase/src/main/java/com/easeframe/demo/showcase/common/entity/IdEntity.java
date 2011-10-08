@@ -1,10 +1,9 @@
 package com.easeframe.demo.showcase.common.entity;
 
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-
-import org.hibernate.annotations.GenericGenerator;
 
 /**
  * 统一定义id的entity基类.
@@ -22,8 +21,7 @@ public abstract class IdEntity {
 	protected String id;
 
 	@Id
-	@GeneratedValue(generator = "UIDGenerator")
-	@GenericGenerator(name = "UIDGenerator", strategy = "com.easeframe.demo.showcase.common.dao.UIDGenerator")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public String getId() {
 		return id;
 	}

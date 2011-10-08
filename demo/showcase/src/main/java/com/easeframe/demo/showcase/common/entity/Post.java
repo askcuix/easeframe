@@ -23,7 +23,7 @@ import org.hibernate.annotations.DiscriminatorOptions;
  */
 
 @Entity
-@Table(name = "EF_POST")
+@Table(name = "POST")
 //单表继承策略
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 //查询对象时强制加入子类标识字段
@@ -73,7 +73,7 @@ public class Post extends IdEntity {
 		user = new User();
 		user.setLoginName(authorName);
 	}
-	
+
 	public Date getModifyTime() {
 		return modifyTime;
 	}

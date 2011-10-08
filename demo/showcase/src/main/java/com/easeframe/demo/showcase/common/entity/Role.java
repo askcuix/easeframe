@@ -14,7 +14,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  */
 
 @Entity
-@Table(name = "EF_ROLE")
+@Table(name = "ROLE")
 public class Role extends IdEntity {
 
 	private String name;
