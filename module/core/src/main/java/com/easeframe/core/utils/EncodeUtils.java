@@ -77,10 +77,10 @@ public abstract class EncodeUtils {
 	}
 
 	private static String alphabetEncode(long num, int base) {
-		num = Math.abs(num);
+		long result = Math.abs(num);
 		StringBuilder sb = new StringBuilder();
-		for (; num > 0; num /= base) {
-			sb.append(ALPHABET.charAt((int) (num % base)));
+		for (; result > 0; result /= base) {
+			sb.append(ALPHABET.charAt((int) (result % base)));
 		}
 
 		return sb.toString();
