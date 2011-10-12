@@ -30,7 +30,6 @@ Checkstyle configuration for EaseFrame
     <module name="RedundantThrows">
       <property name="allowUnchecked" value="true"/>
     </module>
-    <module name="IllegalThrows"/>
     <module name="AnonInnerLength"/>
     <module name="DefaultComesLast"/>
     <module name="EqualsHashCode"/>
