@@ -10,8 +10,13 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.easeframe.core.mapper.JsonMapper;
+import com.easeframe.core.utils.security.DigestUtils;
+import com.easeframe.demo.showcase.cache.memcached.MemcachedObjectType;
 import com.easeframe.demo.showcase.common.dao.UserHibernateDao;
 import com.easeframe.demo.showcase.common.dao.UserMyBatisDao;
+import com.easeframe.demo.showcase.common.entity.User;
+import com.easeframe.demo.showcase.jms.simple.NotifyMessageProducer;
+import com.easeframe.demo.showcase.security.ShiroDbRealm;
 import com.easeframe.extension.memcached.SpyMemcachedClient;
 
 /**

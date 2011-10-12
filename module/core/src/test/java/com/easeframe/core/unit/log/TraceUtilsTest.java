@@ -10,9 +10,15 @@ import org.slf4j.LoggerFactory;
 import com.easeframe.core.log.MockLog4jAppender;
 import com.easeframe.core.log.TraceUtils;
 
+/**
+ * Unit test for TraceUtils.
+ * 
+ * @author Chris
+ *
+ */
 public class TraceUtilsTest {
 
-	Logger logger = LoggerFactory.getLogger(TraceUtilsTest.class);
+	private Logger logger = LoggerFactory.getLogger(TraceUtilsTest.class);
 
 	@Test
 	public void test() {

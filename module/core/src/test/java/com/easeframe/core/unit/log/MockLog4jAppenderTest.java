@@ -8,7 +8,12 @@ import org.slf4j.LoggerFactory;
 
 import com.easeframe.core.log.MockLog4jAppender;
 
-
+/**
+ * Unit test for MockLog4jAppender.
+ * 
+ * @author Chris
+ *
+ */
 public class MockLog4jAppenderTest {
 
 	@Test

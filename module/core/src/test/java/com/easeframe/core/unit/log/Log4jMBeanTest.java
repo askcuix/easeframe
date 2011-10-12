@@ -10,6 +10,12 @@ import org.slf4j.LoggerFactory;
 import com.easeframe.core.log.Log4jMBean;
 import com.easeframe.core.log.MockLog4jAppender;
 
+/**
+ * Unit test for Log4jMBean.
+ * 
+ * @author Chris
+ *
+ */
 public class Log4jMBeanTest {
 
 	@Test
