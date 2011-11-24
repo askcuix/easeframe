@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.Validate;
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
@@ -19,8 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.easeframe.core.utils.AssertUtils;
-import com.easeframe.core.utils.ReflectionUtils;
+import com.easeframe.core.utils.Reflections;
 
 /**
  * 封装Hibernate原生API的DAO泛型基类.
@@ -46,7 +46,7 @@ public class SimpleHibernateDao<T, ID extends Serializable> {
 	 * public class UserDao extends SimpleHibernateDao<User, Long>
 	 */
 	public SimpleHibernateDao() {
-		this.entityClass = ReflectionUtils.getSuperClassGenricType(getClass());
+		this.entityClass = Reflections.getSuperClassGenricType(getClass());
 	}
 
 	public SimpleHibernateDao(Class<T> entityClass) {
@@ -79,7 +79,7 @@ public class SimpleHibernateDao<T, ID extends Serializable> {
 	 * 保存新增或修改的对象.
 	 */
 	public void save(final T entity) {
-		AssertUtils.notNull(entity, "entity is required");
+		Validate.notNull(entity, "entity is required");
 		getSession().saveOrUpdate(entity);
 		logger.debug("save entity: {}", entity);
 	}
@@ -90,7 +90,7 @@ public class SimpleHibernateDao<T, ID extends Serializable> {
 	 * @param entity 对象必须是session中的对象或含id属性的transient对象.
 	 */
 	public void delete(final T entity) {
-		AssertUtils.notNull(entity, "entity is required");
+		Validate.notNull(entity, "entity is required");
 		getSession().delete(entity);
 		logger.debug("delete entity: {}", entity);
 	}
@@ -99,7 +99,7 @@ public class SimpleHibernateDao<T, ID extends Serializable> {
 	 * 按id删除对象.
 	 */
 	public void delete(final ID id) {
-		AssertUtils.notNull(id, "id is required");
+		Validate.notNull(id, "id is required");
 		delete(get(id));
 		logger.debug("delete entity {},id is {}", entityClass.getSimpleName(), id);
 	}
@@ -109,7 +109,7 @@ public class SimpleHibernateDao<T, ID extends Serializable> {
 	 */
 	@SuppressWarnings("unchecked")
 	public T get(final ID id) {
-		AssertUtils.notNull(id, "id is required");
+		Validate.notNull(id, "id is required");
 		return (T) getSession().load(entityClass, id);
 	}
 
@@ -145,7 +145,7 @@ public class SimpleHibernateDao<T, ID extends Serializable> {
 	 * 按属性查找对象列表, 匹配方式为相等.
 	 */
 	public List<T> findBy(final String propertyName, final Object value) {
-		AssertUtils.hasText(propertyName, "propertyName is required");
+		Validate.notBlank(propertyName, "propertyName is required");
 		Criterion criterion = Restrictions.eq(propertyName, value);
 		return find(criterion);
 	}
@@ -155,7 +155,7 @@ public class SimpleHibernateDao<T, ID extends Serializable> {
 	 */
 	@SuppressWarnings("unchecked")
 	public T findUniqueBy(final String propertyName, final Object value) {
-		AssertUtils.hasText(propertyName, "propertyName is required");
+		Validate.notBlank(propertyName, "propertyName is required");
 		Criterion criterion = Restrictions.eq(propertyName, value);
 		return (T) createCriteria(criterion).uniqueResult();
 	}
@@ -227,7 +227,7 @@ public class SimpleHibernateDao<T, ID extends Serializable> {
 	 * @param values 数量可变的参数,按顺序绑定.
 	 */
 	public Query createQuery(final String queryString, final Object... values) {
-		AssertUtils.hasText(queryString, "queryString is required");
+		Validate.notBlank(queryString, "queryString is required");
 		Query query = getSession().createQuery(queryString);
 		if (values != null) {
 			for (int i = 0; i < values.length; i++) {
@@ -244,7 +244,7 @@ public class SimpleHibernateDao<T, ID extends Serializable> {
 	 * @param values 命名参数,按名称绑定.
 	 */
 	public Query createQuery(final String queryString, final Map<String, ?> values) {
-		AssertUtils.hasText(queryString, "queryString is required");
+		Validate.notBlank(queryString, "queryString is required");
 		Query query = getSession().createQuery(queryString);
 		if (values != null) {
 			query.setProperties(values);

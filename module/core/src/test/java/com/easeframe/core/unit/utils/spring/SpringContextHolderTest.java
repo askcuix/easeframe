@@ -6,16 +6,14 @@ import org.junit.Test;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.easeframe.core.utils.ReflectionUtils;
+import com.easeframe.core.utils.Reflections;
 import com.easeframe.core.utils.spring.SpringContextHolder;
 
 /**
  * SpringContextHolder Test.
  */
 public class SpringContextHolderTest {
-	/**
-	 * Test get bean.
-	 */
+
 	@Test
 	public void testGetBean() {
 
@@ -38,7 +36,7 @@ public class SpringContextHolderTest {
 		assertEquals(SpringContextHolder.class, holderByClass.getClass());
 
 		context.close();
-		assertNull(ReflectionUtils.getFieldValue(holderByName, "applicationContext"));
+		assertNull(Reflections.getFieldValue(holderByName, "applicationContext"));
 
 	}
 }

@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.Validate;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.criterion.CriteriaSpecification;
@@ -25,8 +26,7 @@ import com.easeframe.core.orm.PageRequest;
 import com.easeframe.core.orm.PageRequest.Sort;
 import com.easeframe.core.orm.PropertyFilter;
 import com.easeframe.core.orm.PropertyFilter.MatchType;
-import com.easeframe.core.utils.AssertUtils;
-import com.easeframe.core.utils.ReflectionUtils;
+import com.easeframe.core.utils.Reflections;
 
 /**
  * 封装Hibernat DAO泛型基类.
@@ -75,7 +75,7 @@ public class HibernateDao<T, ID extends Serializable> extends SimpleHibernateDao
 	 */
 	@SuppressWarnings("unchecked")
 	public Page<T> findPage(final PageRequest pageRequest, String hql, final Object... values) {
-		AssertUtils.notNull(pageRequest, "pageRequest is required");
+		Validate.notNull(pageRequest, "pageRequest is required");
 
 		Page<T> page = new Page<T>(pageRequest);
 
@@ -107,7 +107,7 @@ public class HibernateDao<T, ID extends Serializable> extends SimpleHibernateDao
 	 */
 	@SuppressWarnings("unchecked")
 	public Page<T> findPage(final PageRequest pageRequest, String hql, final Map<String, ?> values) {
-		AssertUtils.notNull(pageRequest, "pageRequest is required");
+		Validate.notNull(pageRequest, "pageRequest is required");
 
 		Page<T> page = new Page<T>(pageRequest);
 
@@ -138,7 +138,7 @@ public class HibernateDao<T, ID extends Serializable> extends SimpleHibernateDao
 	 */
 	@SuppressWarnings("unchecked")
 	public Page<T> findPage(final PageRequest pageRequest, final Criterion... criterions) {
-		AssertUtils.notNull(pageRequest, "pageRequest is required");
+		Validate.notNull(pageRequest, "pageRequest is required");
 
 		Page<T> page = new Page<T>(pageRequest);
 
@@ -185,7 +185,7 @@ public class HibernateDao<T, ID extends Serializable> extends SimpleHibernateDao
 	 * 设置分页参数到Criteria对象,辅助函数.
 	 */
 	protected Criteria setPageRequestToCriteria(final Criteria c, final PageRequest pageRequest) {
-		AssertUtils.isTrue(pageRequest.getPageSize() > 0, "Page Size must larger than zero");
+		Validate.isTrue(pageRequest.getPageSize() > 0, "Page Size must larger than zero");
 
 		c.setFirstResult(pageRequest.getOffset());
 		c.setMaxResults(pageRequest.getPageSize());
@@ -268,8 +268,8 @@ public class HibernateDao<T, ID extends Serializable> extends SimpleHibernateDao
 
 		List<CriteriaImpl.OrderEntry> orderEntries = null;
 		try {
-			orderEntries = (List) ReflectionUtils.getFieldValue(impl, "orderEntries");
-			ReflectionUtils.setFieldValue(impl, "orderEntries", new ArrayList());
+			orderEntries = (List) Reflections.getFieldValue(impl, "orderEntries");
+			Reflections.setFieldValue(impl, "orderEntries", new ArrayList());
 		} catch (Exception e) {
 			logger.error("不可能抛出的异常:{}", e.getMessage());
 		}
@@ -288,7 +288,7 @@ public class HibernateDao<T, ID extends Serializable> extends SimpleHibernateDao
 			c.setResultTransformer(transformer);
 		}
 		try {
-			ReflectionUtils.setFieldValue(impl, "orderEntries", orderEntries);
+			Reflections.setFieldValue(impl, "orderEntries", orderEntries);
 		} catch (Exception e) {
 			logger.error("不可能抛出的异常:{}", e.getMessage());
 		}
@@ -328,7 +328,7 @@ public class HibernateDao<T, ID extends Serializable> extends SimpleHibernateDao
 	 * 按属性条件参数创建Criterion,辅助函数.
 	 */
 	protected Criterion buildCriterion(final String propertyName, final Object propertyValue, final MatchType matchType) {
-		AssertUtils.hasText(propertyName, "propertyName is required");
+		Validate.notBlank(propertyName, "propertyName is required");
 		Criterion criterion = null;
 		//根据MatchType构造criterion
 		switch (matchType) {

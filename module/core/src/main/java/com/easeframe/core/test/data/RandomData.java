@@ -10,9 +10,12 @@ import java.util.Random;
  * @author Chris
  *
  */
-public abstract class RandomData {
+public final class RandomData {
 
 	private static Random random = new Random();
+
+	private RandomData() {
+	}
 
 	/**
 	 * 返回随机ID.

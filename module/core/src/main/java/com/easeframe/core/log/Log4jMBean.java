@@ -2,6 +2,7 @@ package com.easeframe.core.log;
 
 import java.util.Enumeration;
 
+import org.apache.commons.lang3.Validate;
 import org.apache.log4j.AppenderSkeleton;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -11,8 +12,6 @@ import org.springframework.jmx.export.annotation.ManagedOperation;
 import org.springframework.jmx.export.annotation.ManagedOperationParameter;
 import org.springframework.jmx.export.annotation.ManagedOperationParameters;
 import org.springframework.jmx.export.annotation.ManagedResource;
-
-import com.easeframe.core.utils.AssertUtils;
 
 /**
  * 基于JMX动态配置Log4J日志级别，并控制Trace开关的MBean.
@@ -85,7 +84,7 @@ public class Log4jMBean {
 	 */
 	@ManagedOperation(description = "Start trace")
 	public void startTrace() {
-		AssertUtils.hasText(traceAppenderName);
+		Validate.notBlank(traceAppenderName);
 		Logger logger = Logger.getLogger(projectLoggerName);
 		projectLoggerOrgLevel = logger.getLevel();
 		logger.setLevel(Level.DEBUG);
@@ -100,7 +99,7 @@ public class Log4jMBean {
 	 */
 	@ManagedOperation(description = "Stop trace")
 	public void stopTrace() {
-		AssertUtils.hasText(traceAppenderName);
+		Validate.notBlank(traceAppenderName);
 		Logger logger = Logger.getLogger(projectLoggerName);
 		logger.setLevel(projectLoggerOrgLevel);
 		setTraceAppenderThreshold(logger, Level.OFF);

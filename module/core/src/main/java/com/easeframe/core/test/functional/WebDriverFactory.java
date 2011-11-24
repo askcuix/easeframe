@@ -10,7 +10,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.util.Assert;
 
-import com.easeframe.core.utils.ExceptionUtils;
+import com.easeframe.core.utils.Exceptions;
 
 /**
  * 创建WebDriver的工厂类, 支持主要的firefox,ie和remote三种driver.
@@ -18,10 +18,9 @@ import com.easeframe.core.utils.ExceptionUtils;
  * @author Chris
  *
  */
-public class WebDriverFactory {
+public final class WebDriverFactory {
 
-	public enum BrowserType {
-		firefox, ie, remote
+	private WebDriverFactory() {
 	}
 
 	/**
@@ -58,12 +57,20 @@ public class WebDriverFactory {
 			try {
 				driver = new RemoteWebDriver(new URL("http://" + remoteHost + ":" + remotePort + "/wd"), cap);
 			} catch (MalformedURLException e) {
-				throw ExceptionUtils.unchecked(e);
+				throw Exceptions.unchecked(e);
 			}
 		}
 
 		Assert.notNull(driver, "Driver could be found by name:" + driverName);
 
 		return driver;
+	}
+
+	/**
+	 * enum for browser type.
+	 *
+	 */
+	public enum BrowserType {
+		firefox, ie, remote
 	}
 }

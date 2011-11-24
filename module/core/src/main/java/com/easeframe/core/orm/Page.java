@@ -1,8 +1,9 @@
 package com.easeframe.core.orm;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import com.google.common.collect.Lists;
 
 /**
  * 与具体ORM实现无关的分页参数及查询结果封装.
@@ -137,10 +138,10 @@ public class Page<T> extends PageRequest implements Iterable<T> {
 			startPageNo = Math.max(endPageNo - count, 1);
 		}
 
-		List<Integer> result = new ArrayList<Integer>();
+		List<Integer> pageList = Lists.newArrayList();
 		for (int i = startPageNo; i <= endPageNo; i++) {
-			result.add(i);
+			pageList.add(i);
 		}
-		return result;
+		return pageList;
 	}
 }

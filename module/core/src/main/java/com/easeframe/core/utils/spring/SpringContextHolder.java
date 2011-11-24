@@ -1,12 +1,11 @@
 package com.easeframe.core.utils.spring;
 
+import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-
-import com.easeframe.core.utils.AssertUtils;
 
 /**
  * 以静态变量保存Spring ApplicationContext, 可在任何代码任何地方任何时候中取出ApplicaitonContext.
@@ -78,7 +77,7 @@ public class SpringContextHolder implements ApplicationContextAware, DisposableB
 	 * 检查ApplicationContext不为空.
 	 */
 	private static void assertContextInjected() {
-		AssertUtils.state(applicationContext != null,
+		Validate.validState(applicationContext != null,
 				"applicaitonContext not inject, please define SpringContextHolder in applicationContext.xml.");
 	}
 }

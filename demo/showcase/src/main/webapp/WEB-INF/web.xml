@@ -45,8 +45,8 @@
 		<servlet-class>org.springside.examples.showcase.web.StaticContentServlet</servlet-class>
 	</servlet>
 	<servlet>
-		<servlet-name>RemoteContentServlet</servlet-name>
-		<servlet-class>org.springside.examples.showcase.web.RemoteContentServlet</servlet-class>
+		<servlet-name>MashupContentServlet</servlet-name>
+		<servlet-class>org.springside.examples.showcase.web.MashupContentServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
@@ -54,8 +54,8 @@
 		<url-pattern>/static-content</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>RemoteContentServlet</servlet-name>
-		<url-pattern>/remote-content</url-pattern>
+		<servlet-name>MashupContentServlet</servlet-name>
+		<url-pattern>/mashup-content</url-pattern>
 	</servlet-mapping>
 
 	<!-- Filter 定义 -->

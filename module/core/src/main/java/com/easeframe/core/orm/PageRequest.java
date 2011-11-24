@@ -1,11 +1,11 @@
 package com.easeframe.core.orm;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 
-import com.easeframe.core.utils.AssertUtils;
+import com.google.common.collect.Lists;
 
 /**
  * 分页参数封装类.
@@ -112,10 +112,9 @@ public class PageRequest {
 	public List<Sort> getSort() {
 		String[] orderBys = StringUtils.split(orderBy, ',');
 		String[] orderDirs = StringUtils.split(orderDir, ',');
-		AssertUtils.isTrue(orderBys.length == orderDirs.length,
-				"The number of orderBy and order direction is not matched");
+		Validate.isTrue(orderBys.length == orderDirs.length, "The number of orderBy and order direction is not matched");
 
-		List<Sort> orders = new ArrayList<Sort>();
+		List<Sort> orders = Lists.newArrayList();
 		for (int i = 0; i < orderBys.length; i++) {
 			orders.add(new Sort(orderBys[i], orderDirs[i]));
 		}
@@ -151,6 +150,10 @@ public class PageRequest {
 		return ((pageNo - 1) * pageSize);
 	}
 
+	/**
+	 * Sort utility for pagination.
+	 *
+	 */
 	public static class Sort {
 		public static final String ASC = "asc";
 		public static final String DESC = "desc";

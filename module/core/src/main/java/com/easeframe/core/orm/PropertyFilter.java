@@ -7,11 +7,11 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 
-import com.easeframe.core.mapper.ObjectMapper;
-import com.easeframe.core.utils.AssertUtils;
-import com.easeframe.core.utils.web.ServletUtils;
+import com.easeframe.core.mapper.StringMapper;
+import com.easeframe.core.utils.web.Servlets;
 
 /**
  * 与具体ORM实现无关的属性过滤条件封装类, 主要记录页面中简单的搜索过滤条件.
@@ -78,11 +78,11 @@ public class PropertyFilter {
 		}
 
 		String propertyNameStr = StringUtils.substringAfter(filterName, "_");
-		AssertUtils.isTrue(StringUtils.isNotBlank(propertyNameStr), "Can not obtain compare type because filter name ["
+		Validate.isTrue(StringUtils.isNotBlank(propertyNameStr), "Can not obtain compare type because filter name ["
 				+ filterName + "] not match the rules.");
 		propertyNames = StringUtils.splitByWholeSeparator(propertyNameStr, PropertyFilter.OR_SEPARATOR);
 
-		this.matchValue = ObjectMapper.convertToObject(value, propertyClass);
+		this.matchValue = StringMapper.fromString(value, propertyClass);
 	}
 
 	/**
@@ -106,7 +106,7 @@ public class PropertyFilter {
 		List<PropertyFilter> filterList = new ArrayList<PropertyFilter>();
 
 		//从request中获取含属性前缀名的参数,构造去除前缀名后的参数Map.
-		Map<String, Object> filterParamMap = ServletUtils.getParametersStartingWith(request, filterPrefix + "_");
+		Map<String, Object> filterParamMap = Servlets.getParametersStartingWith(request, filterPrefix + "_");
 
 		//分析参数Map,构造PropertyFilter列表
 		for (Map.Entry<String, Object> entry : filterParamMap.entrySet()) {
@@ -154,7 +154,7 @@ public class PropertyFilter {
 	 * 获取唯一的比较属性名称.
 	 */
 	public String getPropertyName() {
-		AssertUtils.isTrue(propertyNames.length == 1, "There are not only one property in this filter.");
+		Validate.isTrue(propertyNames.length == 1, "There are not only one property in this filter.");
 		return propertyNames[0];
 	}
 

@@ -25,7 +25,7 @@ import com.easeframe.core.orm.hibernate.SimpleHibernateDao;
 import com.easeframe.core.test.data.Fixtures;
 import com.easeframe.core.test.spring.SpringTxTestCase;
 import com.easeframe.core.unit.orm.hibernate.data.User;
-import com.easeframe.core.utils.ReflectionUtils;
+import com.easeframe.core.utils.Reflections;
 
 @ContextConfiguration(locations = { "/applicationContext-core-test.xml" })
 public class SimpleHibernateDaoTest extends SpringTxTestCase {
@@ -186,7 +186,7 @@ public class SimpleHibernateDaoTest extends SpringTxTestCase {
 
 	public void constructor() {
 		MyUserDao myDao = new MyUserDao();
-		Class entityClazz = (Class) ReflectionUtils.getFieldValue(myDao, "entityClass");
+		Class entityClazz = (Class) Reflections.getFieldValue(myDao, "entityClass");
 		assertEquals(User.class, entityClazz);
 	}
 

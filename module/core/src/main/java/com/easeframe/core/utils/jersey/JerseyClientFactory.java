@@ -6,7 +6,16 @@ import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.json.JSONConfiguration;
 
-public class JerseyClientFactory {
+/**
+ * Jersey Client factory.
+ * 
+ * @author Chris
+ *
+ */
+public final class JerseyClientFactory {
+
+	private JerseyClientFactory() {
+	}
 
 	/**
 	 * 创建JerseyClient, 设定JSON字符串使用Jackson解析.

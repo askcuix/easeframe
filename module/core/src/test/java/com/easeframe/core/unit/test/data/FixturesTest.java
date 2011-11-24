@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import javax.sql.DataSource;
 
 import org.junit.Test;
-import org.springframework.beans.BeansException;
 import org.springframework.test.context.ContextConfiguration;
 
 import com.easeframe.core.test.data.Fixtures;
@@ -15,7 +14,7 @@ import com.easeframe.core.test.spring.SpringTxTestCase;
 public class FixturesTest extends SpringTxTestCase {
 
 	@Test
-	public void normal() throws BeansException, Exception {
+	public void normal() throws Exception {
 		simpleJdbcTemplate.update("drop all objects");
 
 		executeSqlScript("classpath:/schema.sql", false);

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.easeframe.core.mapper.JsonMapper;
-import com.easeframe.core.utils.security.DigestUtils;
+import com.easeframe.core.utils.security.Digests;
 import com.easeframe.demo.showcase.cache.memcached.MemcachedObjectType;
 import com.easeframe.demo.showcase.common.dao.UserHibernateDao;
 import com.easeframe.demo.showcase.common.dao.UserMyBatisDao;
@@ -57,7 +57,7 @@ public class AccountManager {
 			throw new ServiceException("不能修改超级管理员用户");
 		}
 
-		String shaPassword = DigestUtils.sha1Hex(user.getPlainPassword());
+		String shaPassword = Digests.sha1Hex(user.getPlainPassword());
 		user.setShaPassword(shaPassword);
 
 		userHibernateDao.save(user);

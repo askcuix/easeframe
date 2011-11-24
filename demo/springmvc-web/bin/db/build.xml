@@ -30,7 +30,7 @@
 				<property name="datatypeFactory" value="${dbunit.datatype}" />
 			</dbconfig>
 			<classpath refid="project.lib" />
-			<operation type="CLEAN_INSERT" src="${dbunit.data.dir}/sample-data.xml" format="flat" />
+			<operation type="CLEAN_INSERT" src="${dbunit.data.dir}/sample-data.xml" format="flat" transaction="true"/>
 		</dbunit>
 	</target>
 

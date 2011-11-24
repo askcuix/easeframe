@@ -12,12 +12,12 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.Version;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import com.easeframe.core.mapper.CollectionMapper;
+import com.easeframe.core.utils.Collections3;
 import com.google.common.collect.Lists;
 
 /**
@@ -125,7 +125,7 @@ public class User extends IdEntity {
 	@Transient
 	@JsonIgnore
 	public String getRoleNames() {
-		return CollectionMapper.extractToString(roleList, "name", ", ");
+		return Collections3.extractToString(roleList, "name", ", ");
 	}
 
 	@Override

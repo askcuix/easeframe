@@ -20,9 +20,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
+import org.springframework.jdbc.core.JdbcTemplate;
 
-import com.easeframe.core.utils.ExceptionUtils;
+import com.easeframe.core.utils.Exceptions;
 
 /**
  * 基于DBUnit初始化测试数据到H2数据库的工具类.
@@ -30,10 +30,13 @@ import com.easeframe.core.utils.ExceptionUtils;
  * @author Chris
  *
  */
-public abstract class Fixtures {
+public final class Fixtures {
 
 	private static Logger logger = LoggerFactory.getLogger(Fixtures.class);
 	private static ResourceLoader resourceLoader = new DefaultResourceLoader();
+
+	private Fixtures() {
+	}
 
 	/**
 	 * 插入XML文件中的数据到H2数据库.
@@ -82,13 +85,13 @@ public abstract class Fixtures {
 	private static void execute(DatabaseOperation operation, DataSource h2DataSource, String... xmlFilePaths)
 			throws DatabaseUnitException, SQLException {
 		//注意这里HardCode了使用H2的Connetion
-		IDatabaseConnection connection = new H2Connection(h2DataSource.getConnection(), null);
+		IDatabaseConnection h2Connection = new H2Connection(h2DataSource.getConnection(), null);
 
 		for (String xmlPath : xmlFilePaths) {
 			try {
 				InputStream input = resourceLoader.getResource(xmlPath).getInputStream();
 				IDataSet dataSet = new FlatXmlDataSetBuilder().setColumnSensing(true).build(input);
-				operation.execute(connection, dataSet);
+				operation.execute(h2Connection, dataSet);
 			} catch (IOException e) {
 				logger.warn(xmlPath + " file not found", e);
 			}
@@ -113,7 +116,7 @@ public abstract class Fixtures {
 
 			deleteTable(h2DataSource, tableNames.toArray(new String[tableNames.size()]));
 		} catch (SQLException e) {
-			throw ExceptionUtils.unchecked(e);
+			throw Exceptions.unchecked(e);
 		}
 
 	}
@@ -122,7 +125,7 @@ public abstract class Fixtures {
 	 * 删除指定的表, 在删除期间disable外键的检查.
 	 */
 	public static void deleteTable(DataSource h2DataSource, String... tableNames) {
-		SimpleJdbcTemplate template = new SimpleJdbcTemplate(h2DataSource);
+		JdbcTemplate template = new JdbcTemplate(h2DataSource);
 
 		template.update("SET REFERENTIAL_INTEGRITY FALSE");
 

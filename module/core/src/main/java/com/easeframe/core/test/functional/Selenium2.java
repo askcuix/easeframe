@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverBackedSelenium;
 import org.openqa.selenium.WebElement;
 
-import com.easeframe.core.utils.ThreadUtils;
+import com.easeframe.core.utils.Threads;
 import com.thoughtworks.selenium.Selenium;
 
 /**
@@ -195,7 +195,7 @@ public class Selenium2 {
 			if (isDisplayed(by)) {
 				return;
 			}
-			ThreadUtils.sleep(DEFAULT_PAUSE_TIME);
+			Threads.sleep(DEFAULT_PAUSE_TIME);
 		}
 		throw new RuntimeException("waitForVisible timeout");
 	}

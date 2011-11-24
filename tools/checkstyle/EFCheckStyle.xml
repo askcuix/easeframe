@@ -14,7 +14,6 @@ Checkstyle configuration for EaseFrame
   <module name="TreeWalker">
     <property name="severity" value="warning"/>
     <module name="FileContentsHolder"/>
-    <module name="ParameterAssignment"/>
     <module name="SimplifyBooleanExpression"/>
     <module name="ModifierOrder"/>
     <module name="MethodName">
@@ -66,6 +65,7 @@ Checkstyle configuration for EaseFrame
     </module>
     <module name="JavadocType">
       <property name="severity" value="warning"/>
+      <property name="excludeScope" value="anoninner"/>
       <property name="scope" value="public"/>
     </module>
     <module name="AvoidStarImport">
