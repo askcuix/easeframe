@@ -1,10 +1,9 @@
 package com.easeframe.core.test.utils;
 
-import static org.easymock.EasyMock.*;
-
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.subject.support.SubjectThreadState;
 import org.apache.shiro.util.ThreadState;
+import org.mockito.Mockito;
 
 /**
  * Shiro helper for test.
@@ -29,13 +28,12 @@ public final class ShiroTestHelper {
 	}
 
 	/**
-	 * 用EasyMock快速創建一個已認證的用户.
+	 * 用Mockito快速創建一個已認證的用户.
 	 */
 	public static void mockSubject(String principal) {
-		Subject subject = createNiceMock(Subject.class);
-		expect(subject.isAuthenticated()).andReturn(true);
-		expect(subject.getPrincipal()).andReturn(principal);
-		replay(subject);
+		Subject subject = Mockito.mock(Subject.class);
+		Mockito.when(subject.isAuthenticated()).thenReturn(true);
+		Mockito.when(subject.getPrincipal()).thenReturn(principal);
 
 		bindSubject(subject);
 	}

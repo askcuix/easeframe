@@ -2,69 +2,48 @@ package com.easeframe.core.unit.test.functional;
 
 import static org.junit.Assert.*;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 
-import mockit.Mock;
-import mockit.MockClass;
-import mockit.Mockit;
-
 import org.junit.Test;
-import org.openqa.selenium.Capabilities;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 import com.easeframe.core.test.functional.WebDriverFactory;
 
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({ WebDriverFactory.class, FirefoxDriver.class, InternetExplorerDriver.class, RemoteWebDriver.class })
 public class WebDriverFactoryTest {
-
-	@MockClass(realClass = RemoteWebDriver.class)
-	public static class MockRemoteWebDriver {
-
-		@Mock
-		public void $init(URL remoteAddress, Capabilities desiredCapabilities) {
-			System.out.println("RemoteWebDriver");
-			try {
-				assertEquals(new URL("http://localhost:3000/wd"), remoteAddress);
-			} catch (MalformedURLException e) {
-				fail("exception happen");
-			}
-			assertEquals(DesiredCapabilities.firefox(), desiredCapabilities);
-		}
-	}
-
-	@MockClass(realClass = FirefoxDriver.class)
-	public static class MockFirefoxDriver {
-		@Mock
-		public void $init() {
-			System.out.println("FirefoxDriver");
-		}
-	}
-
-	@MockClass(realClass = InternetExplorerDriver.class)
-	public static class MockInternetExplorerDriver {
-		@Mock
-		public void $init() {
-			System.out.println("InternetExplorerDriver");
-		}
-	}
+	@Mock
+	private FirefoxDriver firefoxDriver;
+	@Mock
+	private InternetExplorerDriver internetExplorerDriver;
+	@Mock
+	private RemoteWebDriver remoteWebDriver;
 
 	@Test
 	public void buildWebDriver() throws Exception {
-		Mockit.setUpMocks(MockFirefoxDriver.class, MockInternetExplorerDriver.class, MockRemoteWebDriver.class);
 
+		PowerMockito.whenNew(FirefoxDriver.class).withNoArguments().thenReturn(firefoxDriver);
 		WebDriver driver = WebDriverFactory.createDriver("firefox");
 		assertTrue(driver instanceof FirefoxDriver);
 
+		PowerMockito.whenNew(InternetExplorerDriver.class).withNoArguments().thenReturn(internetExplorerDriver);
 		driver = WebDriverFactory.createDriver("ie");
 		assertTrue(driver instanceof InternetExplorerDriver);
 
+		PowerMockito.whenNew(RemoteWebDriver.class)
+				.withArguments(new URL("http://localhost:3000/wd"), DesiredCapabilities.firefox())
+				.thenReturn(remoteWebDriver);
 		driver = WebDriverFactory.createDriver("remote:localhost:3000:firefox");
 		assertTrue(driver instanceof RemoteWebDriver);
 
-		Mockit.tearDownMocks();
 	}
 }
