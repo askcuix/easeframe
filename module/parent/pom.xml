@@ -11,19 +11,19 @@
 	<properties>
 		<!-- 主要依赖库的版本定义 -->
 		<easeframe.version>1.0</easeframe.version>
-		<spring.version>3.1.0.RC1</spring.version>
-		<hibernate.version>3.6.8.Final</hibernate.version>
+		<spring.version>3.1.0.RELEASE</spring.version>
+		<hibernate.version>3.6.9.Final</hibernate.version>
 		<mybatis.version>3.0.6</mybatis.version>
 		<struts2.version>2.2.1</struts2.version>
-		<cxf.version>2.5.0</cxf.version>
-		<jersey.version>1.10</jersey.version>
+		<cxf.version>2.5.1</cxf.version>
+		<jersey.version>1.11</jersey.version>
 		<shiro.version>1.1.0</shiro.version>
 		<activemq.version>5.5.1</activemq.version>
 		<jetty.version>7.5.4.v20111024</jetty.version>
-		<h2.version>1.3.161</h2.version>
-		<jackson.version>1.9.2</jackson.version>
+		<h2.version>1.3.163</h2.version>
+		<jackson.version>1.9.3</jackson.version>
 		<slf4j.version>1.6.4</slf4j.version>
-		<selenium.version>2.12.0</selenium.version>
+		<selenium.version>2.15.0</selenium.version>
 
 		<!-- Plugin的属性定义  -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -41,36 +41,9 @@
 		</repository>
 		
 		<repository>
-			<id>org.springframework.maven.milestone</id>
-			<name>Spring Maven Milestone Repository</name>
-			<url>http://maven.springframework.org/milestone</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-
-		<repository>
 			<id>springside</id>
 			<name>SpringSide Additional Repository</name>
 			<url>http://springside.googlecode.com/svn/repository</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-
-		<repository>
-			<id>jboss</id>
-			<name>Jboss Repository</name>
-			<url>http://repository.jboss.org/nexus/content/groups/public-jboss/</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-
-		<repository>
-			<id>java.net</id>
-			<name>Java.net Repository</name>
-			<url>http://download.java.net/maven/2/</url>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
@@ -162,9 +135,9 @@
 			</dependency>
 
 			<dependency>
-				<groupId>javassist</groupId>
+				<groupId>org.javassist</groupId>
 				<artifactId>javassist</artifactId>
-				<version>3.12.1.GA</version>
+				<version>3.15.0-GA</version>
 			</dependency>
 			<!-- mybatis -->
 			<dependency>
@@ -371,6 +344,10 @@
 						<groupId>com.sun.jersey</groupId>
 						<artifactId>jersey-grizzly2</artifactId>
 					</exclusion>
+					<exclusion>
+						<groupId>com.sun.jersey</groupId>
+						<artifactId>jersey-servlet</artifactId>
+					</exclusion>
 				</exclusions>
 			</dependency>
 			<dependency>
@@ -513,23 +490,35 @@
 			<dependency>
 				<groupId>jaxen</groupId>
 				<artifactId>jaxen</artifactId>
-				<version>1.1.1</version>
+				<version>1.1.3</version>
 				<exclusions>
 					<exclusion>
 						<groupId>xerces</groupId>
 						<artifactId>xercesImpl</artifactId>
 					</exclusion>
 					<exclusion>
-						<groupId>xerces</groupId>
-						<artifactId>xmlParserAPIs</artifactId>
-					</exclusion>
-					<exclusion>
 						<groupId>xml-apis</groupId>
 						<artifactId>xml-apis</artifactId>
 					</exclusion>
 					<exclusion>
-						<groupId>xalan</groupId>
-						<artifactId>xalan</artifactId>
+						<groupId>dom4j</groupId>
+						<artifactId>dom4j</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>jdom</groupId>
+						<artifactId>jdom</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>xom</groupId>
+						<artifactId>xom</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>maven-plugins</groupId>
+						<artifactId>maven-cobertura-plugin</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>maven-plugins</groupId>
+						<artifactId>maven-findbugs-plugin</artifactId>
 					</exclusion>
 				</exclusions>
 			</dependency>
@@ -580,7 +569,7 @@
 			<dependency>
 				<groupId>commons-codec</groupId>
 				<artifactId>commons-codec</artifactId>
-				<version>1.5</version>
+				<version>1.6</version>
 			</dependency>
 			<dependency>
 				<groupId>commons-fileupload</groupId>
@@ -592,7 +581,7 @@
 			<dependency>
 				<groupId>com.google.guava</groupId>
 				<artifactId>guava</artifactId>
-				<version>10.0.1</version>
+				<version>11.0</version>
 			</dependency>
 
 			<!-- joda -->
@@ -632,7 +621,7 @@
 			<dependency>
 				<groupId>com.sun.xml.bind</groupId>
 				<artifactId>jaxb-impl</artifactId>
-				<version>2.2.5-b02</version>
+				<version>2.2.5-b09</version>
 			</dependency>
 
 			<!-- template engine -->
@@ -681,7 +670,7 @@
 			<dependency>
 				<groupId>org.mockito</groupId>
 				<artifactId>mockito-core</artifactId>
-				<version>1.9.0-rc1</version>
+				<version>1.9.0</version>
 				<scope>test</scope>
 			</dependency>
 			<dependency>
@@ -695,6 +684,12 @@
 				<artifactId>powermock-api-mockito</artifactId>
 				<version>1.4.10</version>
 				<scope>test</scope>
+				<exclusions>
+					<exclusion>
+						<groupId>org.mockito</groupId>
+						<artifactId>mockito-all</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 
 			<dependency>
@@ -829,7 +824,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
-					<version>2.10</version>
+					<version>2.11</version>
 					<configuration>
 						<argLine>-Xmx256M</argLine>
 						<includes>
@@ -934,21 +929,21 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-dependency-plugin</artifactId>
-					<version>2.3</version>
+					<version>2.4</version>
 				</plugin>
 
 				<!-- ant插件 -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-antrun-plugin</artifactId>
-					<version>1.6</version>
+					<version>1.7</version>
 				</plugin>
 
 				<!-- assembly plugin -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-assembly-plugin</artifactId>
-					<version>2.2</version>
+					<version>2.2.2</version>
 				</plugin>
 				
 				<!-- sonar插件 -->
@@ -962,12 +957,12 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-release-plugin</artifactId>
-					<version>2.2.1</version>
+					<version>2.2.2</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-scm-plugin</artifactId>
-					<version>1.5</version>
+					<version>1.6</version>
 				</plugin>
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>

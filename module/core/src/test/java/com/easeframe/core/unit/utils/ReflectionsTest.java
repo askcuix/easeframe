@@ -41,14 +41,8 @@ public class ReflectionsTest {
 	@Test
 	public void invokeMethod() {
 		TestBean bean = new TestBean();
-		//		assertEquals("hello chris",
-		//				Reflections.invokeMethod(bean, "privateMethod", new Class[] { String.class }, new Object[] { "chris" }));
-		try {
-			Reflections.invokeMethod(bean, "privateMethod", new Class[] { String.class }, new Object[] { "chris" });
-			fail("Can not access private method.");
-		} catch (IllegalArgumentException e) {
-			System.out.println(e.getMessage());
-		}
+		assertEquals("hello chris",
+				Reflections.invokeMethod(bean, "privateMethod", new Class[] { String.class }, new Object[] { "chris" }));
 	}
 
 	@Test
