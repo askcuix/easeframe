@@ -5,27 +5,12 @@
 	<groupId>com.easeframe</groupId>
 	<artifactId>easeframe</artifactId>
 	<version>1.0</version>
-	<name>EaseFrame's Project</name>
+	<name>EaseFrame Project</name>
 	<packaging>pom</packaging>
-	
-	<profiles>
-		<profile>
-			<id>all</id>
-			<modules>
-				<module>module/parent</module>
-				<module>module/core</module>
-				<module>module/extension</module>
-				<module>demo/showcase</module>
-			</modules>
-		</profile>
-	
-		<profile>
-			<id>modules</id>
-			<modules>
-				<module>module/parent</module>
-				<module>module/core</module>
-				<module>module/extension</module>
-			</modules>
-		</profile>
-	</profiles>
+
+	<modules>
+		<module>modules</module>
+		<module>examples</module>
+	</modules>
+
 </project>
