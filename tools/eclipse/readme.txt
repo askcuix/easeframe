@@ -1,5 +1,0 @@
-1. 导入EaseFrame的代码格式与Cleanup规则，详见后面的附录 (Preferences->Java->Code Style下的Cleanup和Formatter，两者的Profile文件在EaseFrame/tools/eclipse/中)
-2. 设置import static默认使用.* (Preferences-> Java -> Code Style -> Organize Imports, 设置Number of static imports need for .* 为 1)
-3. 设置保存代码时的自动操作 ,包括：format source code->all lines，与Organize  Imports。(Preference->Java->Editor->SaveAction)
-4. 调整与输入法切换冲突的内容助手热键.(Preference->General->Keys, 找到Content Assist, 改为诸如Shift+Space)
-5. 取消XML缺少DTD的warning 并设置XML每行长度为120字符, (Preference->XML->XML Files下的Editor和Validation)
