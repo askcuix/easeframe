@@ -1,3 +1,5 @@
-EaseFrame Project
+#EaseFrame
 
-Use J2EE related framework
+The collection of best practice of J2EE framework, the purpose of this project is record result of learning, and easily used in daily work.
+
+This project just include some framework which used in my work, but not all, because SpringSide has provide a lots of useful practice for popular frameworks, that's enough.
