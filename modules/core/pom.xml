@@ -39,6 +39,11 @@
 			<artifactId>commons-io</artifactId>
 			<optional>true</optional>
 		</dependency>
+		<dependency>
+			<groupId>com.ibm.icu</groupId>
+			<artifactId>icu4j</artifactId>
+			<optional>true</optional>
+		</dependency>
 		<!-- UTILS end -->
 
 		<!-- LOGGING begin -->

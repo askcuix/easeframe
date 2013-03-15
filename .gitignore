@@ -2,4 +2,10 @@
 /.DS_Store
 /.settings
 /modules/core/target/
+/modules/core/.classpath
+/modules/core/.project
+/modules/core/.settings/
 /examples/showcase/target/
+/examples/showcase/.classpath
+/examples/showcase/.project
+/examples/showcase/.settings/

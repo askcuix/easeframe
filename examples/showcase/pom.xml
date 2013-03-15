@@ -9,7 +9,7 @@
 		<relativePath>../../modules/parent/</relativePath>
 	</parent>
 	<groupId>com.easeframe</groupId>
-	<artifactId>showcase</artifactId>
+	<artifactId>easeframe-showcase</artifactId>
 	<packaging>war</packaging>
 	<name>EaseFrame :: Examples :: Showcase</name>
 
