@@ -5,6 +5,10 @@
 /modules/core/.classpath
 /modules/core/.project
 /modules/core/.settings/
+/modules/test/target/
+/modules/test/.classpath
+/modules/test/.project
+/modules/test/.settings/
 /examples/showcase/target/
 /examples/showcase/.classpath
 /examples/showcase/.project

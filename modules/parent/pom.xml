@@ -5,13 +5,15 @@
 	<groupId>com.easeframe</groupId>
 	<artifactId>easeframe-parent</artifactId>
 	<version>1.0</version>
-	<name>EaseFrame :: Module :: Parent</name>
+	<name>EaseFrame :: Modules :: Parent</name>
 	<packaging>pom</packaging>
 
 	<properties>
 		<easeframe.version>1.0</easeframe.version>
 		<spring.version>3.2.0.RELEASE</spring.version>
+		<spring.batch.version>2.1.8.RELEASE</spring.batch.version>
 		<hibernate.version>4.1.9.Final</hibernate.version>
+		<hibernate-validator.version>4.3.1.Final</hibernate-validator.version>
 		<commons-dbcp.version>1.4</commons-dbcp.version>
 		<shiro.version>1.2.1</shiro.version>
 		<ehcache.version>2.6.2</ehcache.version>
@@ -20,6 +22,8 @@
 		<commons-lang3.version>3.1</commons-lang3.version>
 		<commons-io.version>2.4</commons-io.version>
 		<junit.version>4.11</junit.version>
+		<mockito.version>1.9.5</mockito.version>
+		<powermock.version>1.5</powermock.version>
 		<jetty.version>7.6.8.v20121106</jetty.version>
 		<h2.version>1.3.170</h2.version>
 
@@ -140,6 +144,13 @@
 			</dependency>
 			<!-- PERSISTENCE end -->
 
+			<!-- spring batch -->
+			<dependency>
+				<groupId>org.springframework.batch</groupId>
+				<artifactId>spring-batch-core</artifactId>
+				<version>${spring.batch.version}</version>
+			</dependency>
+
 			<!-- WEB begin -->
 			<!-- spring mvc -->
 			<dependency>
@@ -256,6 +267,22 @@
 				<artifactId>commons-io</artifactId>
 				<version>${commons-io.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>commons-codec</groupId>
+				<artifactId>commons-codec</artifactId>
+				<version>1.7</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-beanutils</groupId>
+				<artifactId>commons-beanutils</artifactId>
+				<version>1.8.3</version>
+				<exclusions>
+					<exclusion>
+						<groupId>commons-logging</groupId>
+						<artifactId>commons-logging</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
 			<!-- GENERAL UTILS end -->
 
 			<!-- OTHER TOOLS begin -->
@@ -285,6 +312,32 @@
 				<artifactId>junit</artifactId>
 				<version>${junit.version}</version>
 				<scope>test</scope>
+			</dependency>
+			
+			<!-- mockito -->
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-core</artifactId>
+				<version>${mockito.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.powermock</groupId>
+				<artifactId>powermock-module-junit4</artifactId>
+				<version>${powermock.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.powermock</groupId>
+				<artifactId>powermock-api-mockito</artifactId>
+				<version>${powermock.version}</version>
+				<scope>test</scope>
+				<exclusions>
+					<exclusion>
+						<groupId>org.mockito</groupId>
+						<artifactId>mockito-all</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 
 			<!-- spring -->

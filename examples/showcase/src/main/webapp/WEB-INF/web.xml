@@ -3,14 +3,43 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
 
-	<display-name>showcase</display-name>
+	<display-name>easeframe-showcase</display-name>
+	
+	<!-- Spring ApplicationContext Configure files, used for Spring Context Loader -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			classpath*:/applicationContext.xml
+			classpath*:/applicationContext-showcases.xml
+		</param-value>
+	</context-param>
+	
+	<!-- set default Spring Context Profile -->
+	<context-param>
+    	<param-name>spring.profiles.default</param-name>
+    	<param-value>production</param-value>
+	</context-param>
 
-	<!--Spring ApplicationContext 载入 -->
+	<!--Spring ApplicationContext Loader -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	
+	<!-- Spring MVC Servlet -->
+	<servlet>
+		<servlet-name>springServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring-mvc.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>springServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
 
-	<!-- Filter 定义 -->
 	<!-- Character Encoding filter -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
@@ -42,5 +71,25 @@
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
+	
+	<!-- Cache Control Header filter -->
+	<filter>
+		<filter-name>cacheControlHeaderFilter</filter-name>
+		<filter-class>com.easeframe.showcase.web.CacheControlHeaderFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>cacheControlHeaderFilter</filter-name>
+		<url-pattern>/static/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- error page -->
+	<error-page>
+		<exception-type>java.lang.Throwable</exception-type>
+		<location>/WEB-INF/views/error/500.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/WEB-INF/views/error/500.jsp</location>
+	</error-page>
 
 </web-app>
