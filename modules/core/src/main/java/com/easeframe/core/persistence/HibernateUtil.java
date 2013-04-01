@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import javax.sql.DataSource;
 
 import org.apache.commons.lang3.StringUtils;
-import org.hibernate.Hibernate;
 import org.hibernate.dialect.H2Dialect;
 import org.hibernate.dialect.MySQL5InnoDBDialect;
 import org.hibernate.dialect.Oracle10gDialect;
@@ -18,15 +17,6 @@ import org.hibernate.dialect.Oracle10gDialect;
  * 
  */
 public class HibernateUtil {
-
-	/**
-	 * Initialize the lazy property value.
-	 * 
-	 * eg. Hibernates.initLazyProperty(user.getGroups());
-	 */
-	public static void initLazyProperty(Object proxyedPropertyValue) {
-		Hibernate.initialize(proxyedPropertyValue);
-	}
 
 	/**
 	 * Get hibernate dialect according to jdbc url.
